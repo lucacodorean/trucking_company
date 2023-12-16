@@ -5,21 +5,20 @@
 <hibernate-configuration>
 
     <session-factory>
-
         <property name="hbm2ddl.auto">update</property>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/trucking_company</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/trucking_company?useSSL=false</property>
 
         <!--Replace with your MySQL username and password-->
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">parola</property>
-
+        <property name="hibernate.connection.password">pass</property>
 
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="show_sql">true</property>
 
         <!-- Map Java Class to DB Entity-->
-        <!-- <mapping class="app.model.User"/> -->
+        <mapping class="app.models.Role"/>
+        <mapping class="app.models.User"/>
     
     </session-factory>
 </hibernate-configuration>
