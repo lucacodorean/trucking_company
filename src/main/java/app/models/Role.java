@@ -1,8 +1,9 @@
 package app.models;
 
-import lombok.*;
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import javax.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name="roles", schema = "trucking_company")
@@ -14,8 +15,12 @@ import java.io.Serializable;
 })
 
 public class Role implements Serializable, Model{
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Integer id;
-    @Column private String position;
-    @Column private String salary;
-    @Column private String modelKey;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @JsonIgnore 
+    @Id 
+    private Integer id;
+    
+    @Column(unique = true)  private String position;
+    @Column                 private String salary;
+    @Column @JsonIgnore     private String modelKey = generateKey(this);
 }

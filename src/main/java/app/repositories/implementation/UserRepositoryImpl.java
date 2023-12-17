@@ -28,8 +28,9 @@ public class UserRepositoryImpl implements UserRepository {
         Transaction transaction = currentSession.beginTransaction();
 
         Integer idOfUpdatedUser = user.getId();
-        transaction.commit();
         currentSession.saveOrUpdate(user);
+        transaction.commit();
+        currentSession.close();
         return findById(idOfUpdatedUser);
     }
 
@@ -43,7 +44,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         User user;
         try {
-            user = (User)query.getSingleResult();
+            user = query.getSingleResult();
         } catch(NoResultException exception) {
             user = null;
         }

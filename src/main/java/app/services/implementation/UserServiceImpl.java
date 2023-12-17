@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import app.dto.UserDTO;
 import app.models.User;
 import app.services.UserService;
 import app.repositories.UserRepository;

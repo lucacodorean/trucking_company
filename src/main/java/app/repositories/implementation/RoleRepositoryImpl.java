@@ -33,8 +33,8 @@ public class RoleRepositoryImpl implements RoleRepository{
         Transaction transaction = currentSession.beginTransaction();
 
         Integer idOfRole = role.getId();
-        transaction.commit();
         currentSession.saveOrUpdate(role);
+        transaction.commit();
         return findById(idOfRole);
     }
 
@@ -49,7 +49,7 @@ public class RoleRepositoryImpl implements RoleRepository{
 
         Role role;
         try {
-            role = (Role)query.getSingleResult();
+            role = query.getSingleResult();
         } catch(NoResultException exception) {
             role = null;
         }
@@ -71,7 +71,7 @@ public class RoleRepositoryImpl implements RoleRepository{
 
         Role role;
         try {
-            role = (Role)query.getSingleResult();
+            role = query.getSingleResult();
         } catch(NoResultException exception) {
             role = null;
         }
