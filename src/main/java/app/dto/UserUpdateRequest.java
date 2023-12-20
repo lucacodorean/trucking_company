@@ -10,4 +10,6 @@ public class UserUpdateRequest {
     @Nullable private String email;
     @Nullable private String password;
     @Nullable private String phoneNumber;
+    @Nullable private String addressKey;
+    @Nullable private String roleKey;
 }

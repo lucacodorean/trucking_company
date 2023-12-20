@@ -22,5 +22,5 @@ public class Role implements Serializable, Model{
     
     @Column(unique = true)  private String position;
     @Column                 private String salary;
-    @Column @JsonIgnore     private String modelKey = generateKey(this);
+    @Column                 private String modelKey = generateKey(this);
 }

@@ -32,8 +32,9 @@ public class User implements Serializable, Model {
     @Column(unique = true)  private String email;
     @Column                 private String password;
     @Column(unique = true)  private String phoneNumber;
-    @Column @JsonIgnore     private String modelKey         = generateKey(this);
+    @Column                 private String modelKey         = generateKey(this);
     @Column @JsonIgnore     private Date   employmentDate   = generateDate();
 
     @OneToOne private Role role;
+    @OneToOne private Address address;
 }
