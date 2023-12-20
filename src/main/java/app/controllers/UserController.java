@@ -18,6 +18,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import app.dto.UserStoreRequest;
 import app.dto.UserUpdateRequest;
 import app.models.User;
+import app.services.AddressService;
 import app.services.RoleService;
 import app.services.UserService;
 import app.single_point_access.ServiceSinglePointAccess;
@@ -26,9 +27,10 @@ import app.single_point_access.ServiceSinglePointAccess;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    private UserService userService = ServiceSinglePointAccess.getUserService();
-    private RoleService roleService = ServiceSinglePointAccess.getRoleService();
-    private ModelMapper modelMapper = new ModelMapper();
+    private UserService userService         = ServiceSinglePointAccess.getUserService();
+    private RoleService roleService         = ServiceSinglePointAccess.getRoleService();
+    private AddressService addressService   = ServiceSinglePointAccess.getAddressService();
+    private ModelMapper modelMapper         = new ModelMapper();
 
     @GetMapping("/")
     public ResponseEntity<List<User>> index() {
@@ -70,6 +72,12 @@ public class UserController {
            if(ok) user.setPhoneNumber(request.getPhoneNumber());
         }
 
+        if(request.getAddressKey() != null) 
+            user.setAddress(addressService.findByKey(request.getAddressKey()));
+
+        if(request.getRoleKey() != null) 
+            user.setAddress(addressService.findByKey(request.getRoleKey()));
+
         User userUpdated = userService.update(user);
         return ResponseEntity.status(HttpStatus.OK).body(userUpdated);
     }
@@ -85,6 +93,7 @@ public class UserController {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         User user = modelMapper.map(request, User.class);
         user.setRole(roleService.findByKey(request.getRoleKey()));
+        user.setAddress(addressService.findByKey(request.getAddressKey()));
         return user;
     }
 }

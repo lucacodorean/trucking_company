@@ -7,7 +7,7 @@
     <session-factory>
         <property name="hbm2ddl.auto">update</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/trucking_company?useSSL=false</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/trucking_company</property>
 
         <!--Replace with your MySQL username and password-->
         <property name="hibernate.connection.username">root</property>
@@ -19,6 +19,7 @@
         <!-- Map Java Class to DB Entity-->
         <mapping class="app.models.Role"/>
         <mapping class="app.models.User"/>
+        <mapping class="app.models.Address"/>
     
     </session-factory>
 </hibernate-configuration>

@@ -2,9 +2,13 @@ package app.controllers;
 
 import app.dto.RoleStoreRequest;
 import app.dto.RoleUpdateRequest;
+import app.dto.UserDTO;
 import app.models.Role;
-
+import app.models.User;
 import app.services.RoleService;
+import app.services.UserService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -27,7 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoleController {
     
     private RoleService roleService = ServiceSinglePointAccess.getRoleService();
-    private ModelMapper modelMapper;
+    private UserService userService = ServiceSinglePointAccess.getUserService();
+    private ModelMapper modelMapper = new ModelMapper();
 
     @GetMapping("/")
     public ResponseEntity<List<Role>> index() {
@@ -64,6 +69,22 @@ public class RoleController {
     @DeleteMapping("/{roleKey}")
     public boolean delete(@PathVariable String roleKey) {
         return roleService.delete(roleService.findByKey(roleKey));
+    }
+
+    @GetMapping("/{roleKey}/getUsers")
+    public ResponseEntity<ArrayList<UserDTO>> getAllUsers(@PathVariable String roleKey) {
+        List<User> users = userService.findAll();
+        ArrayList<UserDTO> result = new ArrayList<UserDTO>();
+
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        for(User currentUser : users) {
+            if(currentUser.getRole().getModelKey().compareTo(roleKey) == 0) {
+                result.add(modelMapper.map(currentUser, UserDTO.class));
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     private Role convertDtoToEntity(RoleStoreRequest request) {
