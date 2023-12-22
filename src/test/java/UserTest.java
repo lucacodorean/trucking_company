@@ -53,7 +53,8 @@ public class UserTest {
             "test@email.com", 
             "password", 
             "40766692709", 
-            "rol_uFMaGQfnzY2siIlDJWTqUDSDI"
+            "rol_uFMaGQfnzY2siIlDJWTqUDSDI",
+            "add_H7dZ9jVNKCCqk31duvxMKgpvu"
         );
 
         String requestBody = mapper.writeValueAsString(payload);
