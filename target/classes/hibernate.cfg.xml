@@ -20,6 +20,7 @@
         <mapping class="app.models.Role"/>
         <mapping class="app.models.User"/>
         <mapping class="app.models.Address"/>
+        <mapping class="app.models.Truck"/>
     
     </session-factory>
 </hibernate-configuration>
