@@ -18,9 +18,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import app.Main;
+import app.controllers.UserController;
 import app.dto.UserStoreRequest;
 import app.services.UserService;
-import app.controllers.UserController;
 
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)

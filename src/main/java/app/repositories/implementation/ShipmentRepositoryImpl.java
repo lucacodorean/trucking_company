@@ -1,106 +1,109 @@
 package app.repositories.implementation;
 
 import java.util.List;
-import app.models.Truck;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import javax.persistence.TypedQuery;
-import org.hibernate.SessionFactory;
-import app.repositories.TruckRepository;
+
 import javax.persistence.NoResultException;
-import app.configuration.HibernateConfiguration;
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import app.configuration.HibernateConfiguration;
+import app.models.Shipment;
+import app.repositories.ShipmentRepository;
+
 @Repository
-public class TruckRepositoryImpl implements TruckRepository {
-    @Override public Truck save(Truck truck) {
+public class ShipmentRepositoryImpl implements ShipmentRepository {
+    @Override public Shipment save(Shipment shipment) {
         SessionFactory sessionFactory  = HibernateConfiguration.getSessionFactory();
         Session currentSession = sessionFactory.openSession();
         Transaction transaction = currentSession.beginTransaction();
 
-        Integer idOfTruck = (Integer)currentSession.save(truck);
+        Integer idOfShipment = (Integer)currentSession.save(shipment);
         transaction.commit();
         currentSession.close();
 
-        return findById(idOfTruck);
+        return findById(idOfShipment);
     }
 
-    @Override public Truck update(Truck truck) {
+    @Override public Shipment update(Shipment shipment) {
         SessionFactory sessionFactory  = HibernateConfiguration.getSessionFactory();
         Session currentSession = sessionFactory.openSession();
         Transaction transaction = currentSession.beginTransaction();
 
-        Integer idOfTruck = truck.getId();
-        currentSession.saveOrUpdate(truck);
+        Integer idOfShipment = shipment.getId();
+        currentSession.saveOrUpdate(shipment);
         transaction.commit();
-        return findById(idOfTruck);
+        return findById(idOfShipment);
     }
 
     @SuppressWarnings("unchecked")
-    @Override public Truck findById(Integer id) {
+    @Override public Shipment findById(Integer id) {
         SessionFactory sessionFactory  = HibernateConfiguration.getSessionFactory();
         Session currentSession = sessionFactory.openSession();
         Transaction transaction = currentSession.beginTransaction();
 
-        TypedQuery<Truck> query = currentSession.getNamedQuery("findTruckById");
+        TypedQuery<Shipment> query = currentSession.getNamedQuery("findShipmentById");
         query.setParameter("id", id);
 
-        Truck truck;
+        Shipment shipment;
         try {
-            truck = query.getSingleResult();
+            shipment = query.getSingleResult();
         } catch(NoResultException exception) {
-            truck = null;
+            shipment = null;
         }
 
         transaction.commit();
         currentSession.close();
 
-        return truck;
+        return shipment;
     }
 
     @SuppressWarnings("unchecked")
-    @Override public Truck findByKey(String key) {
+    @Override public Shipment findByKey(String key) {
         SessionFactory sessionFactory  = HibernateConfiguration.getSessionFactory();
         Session currentSession = sessionFactory.openSession();
         Transaction transaction = currentSession.beginTransaction();
 
-        TypedQuery<Truck> query = currentSession.getNamedQuery("findTruckByKey");
+        TypedQuery<Shipment> query = currentSession.getNamedQuery("findShipmentByKey");
         query.setParameter("key", key);
 
-        Truck truck;
+        Shipment shipment;
         try {
-            truck = query.getSingleResult();
+            shipment = query.getSingleResult();
         } catch(NoResultException exception) {
-            truck = null;
+            shipment = null;
         }
 
         transaction.commit();
         currentSession.close();
 
-        return truck;
+        return shipment;
     }
 
     @SuppressWarnings("unchecked")
-    @Override public List<Truck> findAll() {
+    @Override public List<Shipment> findAll() {
         SessionFactory sessionFactory  = HibernateConfiguration.getSessionFactory();
         Session currentSession = sessionFactory.openSession();
         Transaction transaction = currentSession.beginTransaction();
 
-        TypedQuery<Truck> query = currentSession.getNamedQuery("findAllTrucks");
-        List<Truck> trucks =  query.getResultList();
+        TypedQuery<Shipment> query = currentSession.getNamedQuery("findAllShipments");
+        List<Shipment> shipments =  query.getResultList();
         
         transaction.commit();
         currentSession.close();
 
-        return trucks;
+        return shipments;
     }
 
-    @Override public boolean delete(Truck truck) {
+    @Override public boolean delete(Shipment shipment) {
         Session currentSession  = HibernateConfiguration.getSessionFactory().openSession();
         Transaction transaction = currentSession.beginTransaction();
 
-        Integer id = truck.getId();
-        currentSession.delete(truck);
+        Integer id = shipment.getId();
+        currentSession.delete(shipment);
 
         transaction.commit();
         currentSession.clear();
