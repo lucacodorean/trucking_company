@@ -6,6 +6,8 @@ import org.hibernate.annotations.NamedQuery;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
+
 import lombok.*;
 
 @Entity
@@ -16,9 +18,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedQueries({ 
-    @NamedQuery(name = "findUserByKey", query =  " from User usr where usr.modelKey = :key"),
-    @NamedQuery(name = "findAllUsers",  query =  " from User"),
-    @NamedQuery(name = "findUserById",  query =  " from User usr where usr.id = :id"),
+    @NamedQuery(name = "findUserByKey",  query =  " from User usr where usr.modelKey = :key"),
+    @NamedQuery(name = "findUserById",   query =  " from User usr where usr.id = :id"),
+    @NamedQuery(name = "findAllUsers",   query =  " from User")
 })
 
 public class User implements Serializable, Model {
@@ -35,6 +37,7 @@ public class User implements Serializable, Model {
     @Column                 private String modelKey         = generateKey(this);
     @Column @JsonIgnore     private Date   employmentDate   = generateDate();
 
-    @OneToOne private Role role;
-    @OneToOne private Address address;
+    @OneToOne  private Role role;
+    @OneToOne  private Address address;
+    @OneToMany(mappedBy =  "user") @JsonIgnore private Set<ActivityLog> activities;
 }

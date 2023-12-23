@@ -21,6 +21,9 @@
         <mapping class="app.models.User"/>
         <mapping class="app.models.Address"/>
         <mapping class="app.models.Truck"/>
+        <mapping class="app.models.Trailer"/>
+        <mapping class="app.models.Shipment"/>
+        <mapping class="app.models.ActivityLog"/>
     
     </session-factory>
 </hibernate-configuration>
