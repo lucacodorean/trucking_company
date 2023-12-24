@@ -88,7 +88,7 @@ public class RoleRepositoryImpl implements RoleRepository{
         Session currentSession = sessionFactory.openSession();
         Transaction transaction = currentSession.beginTransaction();
 
-        TypedQuery<Role> query = currentSession.getNamedQuery("findAllUsers");
+        TypedQuery<Role> query = currentSession.getNamedQuery("findAllRoles");
         List<Role> roles =  query.getResultList();
         
         transaction.commit();

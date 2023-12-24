@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/shipments/")
 public class ShipmentController {
-    private ShipmentService shipmentService  = ServiceSinglePointAccess.getshShipmentService();
+    private ShipmentService shipmentService  = ServiceSinglePointAccess.getShipmentService();
     private AddressService  addressService   = ServiceSinglePointAccess.getAddressService();
     private ModelMapper     modelMapper = new ModelMapper();
 

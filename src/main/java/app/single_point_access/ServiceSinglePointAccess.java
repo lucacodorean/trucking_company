@@ -43,7 +43,7 @@ public class ServiceSinglePointAccess {
     public static TruckService       getTruckService()          { return truckService;   }
     public static AddressService     getAddressService()        { return addressService; }
     public static TrailerService     getTrailerService()        { return trailerService; }
-    public static ShipmentService    getshShipmentService()     { return shipmentService; }
-    public static ActivityLogService getaActivityLogService()   { return activityLogService; }
+    public static ShipmentService    getShipmentService()     { return shipmentService; }
+    public static ActivityLogService getActivityLogService()    { return activityLogService; }
 }
 
