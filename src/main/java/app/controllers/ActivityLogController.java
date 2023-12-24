@@ -31,8 +31,8 @@ public class ActivityLogController {
     private UserService     userService         = ServiceSinglePointAccess.getUserService();
     private TruckService    truckService        = ServiceSinglePointAccess.getTruckService();
     private TrailerService  trailerService      = ServiceSinglePointAccess.getTrailerService();
-    private ShipmentService shipmentService     = ServiceSinglePointAccess.getshShipmentService();
-    private ActivityLogService activityService  = ServiceSinglePointAccess.getaActivityLogService();
+    private ShipmentService shipmentService     = ServiceSinglePointAccess.getShipmentService();
+    private ActivityLogService activityService  = ServiceSinglePointAccess.getActivityLogService();
     private ModelMapper     modelMapper      = new ModelMapper();
 
     @GetMapping("/")
